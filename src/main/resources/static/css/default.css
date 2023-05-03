@@ -1,0 +1,71 @@
+@charset "utf-8";
+
+
+/* Reset */
+ * {outline:0 !important;}
+html,body,h1,h2,h3,h4,h5,h6,div,p,blockquote,pre,code,address,ul,ol,li,menu,nav,section,article,aside,
+dl,dt,dd,table,thead,tbody,tfoot,label,caption,th,td,form,fieldset,legend,hr,input,button,textarea,object,figure,figcaption {margin:0;padding:0;}
+html, body{width:100%;}
+html{-webkit-touch-callout:none; /*-webkit-user-select:none;*/ -webkit-tap-highlight-color:rgba(0, 0, 0, 0); font-size: 62.5%;}
+body{width:100%; background:var(--color-white); min-width:320px; -webkit-text-size-adjust:none;word-wrap:break-word;word-break:break-all;}
+body,input,select,textarea,button {border:none; font-size: 1.4rem; line-height: 2.2rem; font-weight: 400; color: var(--color-black); letter-spacing: -0.07em; font-family:'Noto Sans KR', sans-serif;}
+ul{list-style:none;}
+table{width:100%;border-spacing:0;border-collapse:collapse;}
+img,fieldset{border:0;}
+address,cite,code,em{font-style:normal;font-weight:normal;}
+label,img,input,select,textarea,button{vertical-align:middle;}
+.hide,caption,legend{line-height:0;font-size:1px;overflow:hidden;}
+hr{display:none;}
+main,header,section,nav,footer,aside,article,figure{display:block;}
+a{color:var(--color-black); text-decoration:none;}
+ 
+/* Form */
+textarea {}
+select {color: var(--color-black); background:var(--color-white);}
+input[type=tel],
+input[type=time],
+input[type=text],
+input[type=password],
+input[type=search],
+input[type=email],
+input[type=file],
+input[type=url],
+input[type=number],
+input[type=date],
+textarea {width:100%; color: var(--color-black); background:var(--color-white); vertical-align:middle;}
+input::-webkit-input-placeholder,
+input::placeholder {color: var(--color-gray);}
+textarea {}
+select:focus,
+textarea:focus,
+input:focus {}
+
+input[type=tel][readonly],
+input[type=text][readonly],
+input[type=password][readonly],
+input[type=email][readonly], 
+input[type=search][readonly], 
+input[type=tel][disabled],
+input[type=text][disabled],
+input[type=password][disabled],
+input[type=search][disabled],
+input[type=email][disabled]{-webkit-appearance:none; background: var(--color-primary-v3);}
+textarea[readonly],
+textarea[disabled]{}
+
+
+
+
+
+
+.clear {clear:both;}
+.clear:after { content:""; display:block; clear:both;}
+
+
+input[type="radio"],
+input[type="checkbox"] {-webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: pointer;}
+button, label {cursor: pointer;}
+
+
+
+

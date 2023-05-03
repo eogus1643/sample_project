@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skt.mydata.mapper.FileMapper">
+
+	<insert id="addFile" parameterType="com.skt.mydata.vo.FileVO">
+		INSERT INTO tb_file
+		(
+			GUBUN
+			 , REAL_FILE_NAME
+			 , SERVER_FILE_NAME
+			 , EXTSN
+			 , FILE_SIZE
+			 , FILE_PATH
+			 , REG_DT
+		)
+		VALUES
+		(
+			#{gubun}
+			, #{realFileName}
+			, #{serverFileName}
+			, #{extsn}
+			, #{fileSize}
+			, #{filePath}
+			, now()
+		)
+	</insert>
+	
+	<select id="selectFile" parameterType="com.skt.mydata.vo.FileVO" resultType="com.skt.mydata.vo.FileVO">
+		SELECT
+			@ROWNUM := @ROWNUM + 1 AS ROWNUM
+			, TB.*
+		FROM
+		(
+			SELECT
+				SEQ
+				, GUBUN
+				, REAL_FILE_NAME
+				, SERVER_FILE_NAME 
+				, EXTSN
+				, FILE_SIZE
+				, FILE_PATH
+				, DATE_FORMAT(REG_DT,'%Y.%m.%d') AS REG_DT
+			FROM tb_file
+			WHERE gubun = #{gubun}
+			AND DELETE_YN = 'N'
+			ORDER by SEQ DESC
+		) tb
+		, (SELECT @ROWNUM := 0 ) B
+		ORDER BY ROWNUM ASC
+		LIMIT #{page}, #{pageSize}
+	</select>
+	
+	<update id="deleteFile" parameterType="com.skt.mydata.vo.FileVO">
+		UPDATE tb_file
+		SET 
+			DELETE_YN = 'Y'
+			, DEL_DT = NOW()
+		WHERE GUBUN = #{gubun}
+		AND DELETE_YN = 'N'
+		AND SEQ IN 
+				<foreach collection="seqArr" item="seq" open="(" close=")" separator=",">
+				 	 #{seq}
+				</foreach>
+	</update>
+	
+	<select id="selectDetail" parameterType="com.skt.mydata.vo.FileVO" resultType="com.skt.mydata.vo.FileVO">
+		SELECT
+			SEQ
+			, GUBUN
+			, REAL_FILE_NAME
+			, SERVER_FILE_NAME
+			, EXTSN
+			, FILE_SIZE
+			, FILE_PATH
+			, DATE_FORMAT(REG_DT,'%Y.%m.%d') AS REG_DT
+		FROM tb_file
+		WHERE SEQ = #{seq}
+		AND GUBUN = #{gubun}
+		AND DELETE_YN = 'N'
+	</select>
+	
+	<select id="selectRealFileName" parameterType="com.skt.mydata.vo.FileVO" resultType="com.skt.mydata.vo.FileVO">
+		SELECT
+			REAL_FILE_NAME
+			, SERVER_FILE_NAME
+		FROM tb_file
+		WHERE SEQ = #{seq}
+		AND GUBUN = #{gubun}
+		AND DELETE_YN = 'N'
+	</select>
+</mapper>

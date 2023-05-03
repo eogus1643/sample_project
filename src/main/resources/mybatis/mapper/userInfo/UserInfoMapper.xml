@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skt.mydata.mapper.UserInfoMapper">
+
+
+	<sql id="whereUserList">
+		
+		<if test="userId != null and userId != ''">
+			AND A.USER_ID = #{userId}
+		</if>
+		<if test="userName != null and userName != ''">
+			AND A.USER_NAME = #{userName}
+		</if>
+		
+	</sql>
+	
+	<insert id="insertUserInfo" parameterType="UserInfoVO">
+		INSERT INTO userInfo
+		(
+			USER_ID 
+			, USER_PASSWORD
+			, USER_NAME
+			, USER_PHONE_NUMBER
+			, USER_EMAIL
+			, REG_DT
+		) VALUES (
+			#{userId}
+			, #{userPassword}
+			, #{userName}
+			, #{userPhoneNumber}
+			, #{userEmail}
+			, SYSDATE()
+		)
+	</insert>
+	
+	<select id="selectUserInfo" parameterType="UserInfoVO" resultType="UserInfoVO">
+		SELECT
+			SEQ
+			, USER_ID 
+			, USER_NAME
+			, USER_PASSWORD
+			, USER_PHONE_NUMBER
+			, USER_EMAIL 
+			, LAST_LOGIN_DT
+			, DATE_FORMAT(REG_DT, '%Y-%m-%d %H:%I:%S') as REG_DT
+		FROM userInfo
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="selectUserDuplicationCheck" parameterType="UserInfoVO" resultType="int">
+		SELECT
+			COUNT(USER_ID) AS CNT
+		FROM userInfo
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<update id="updateLastLoginDt" parameterType="UserInfoVO">
+		UPDATE userInfo
+		SET LAST_LOGIN_DT = SYSDATE()
+		WHERE USER_ID = #{userId}
+	</update>
+	
+	<select id="selectUserInfoList" parameterType="UserInfoVO" resultType="UserInfoVO">
+		SELECT
+			A.SEQ
+			, A.USER_ID
+			, A.USER_NAME
+			, A.USER_PHONE_NUMBER
+			, A.USER_EMAIL
+			, DATE_FORMAT(A.LAST_LOGIN_DT, '%Y-%m-%d %H:%I:%S') as LAST_LOGIN_DT
+			, DATE_FORMAT(A.REG_DT, '%Y-%m-%d %H:%I:%S') as REG_DT
+			, DATE_FORMAT(A.UPD_DT, '%Y-%m-%d %H:%I:%S') as UPD_DT
+		FROM userInfo A
+		WHERE 1=1
+		<include refid="whereUserList"/>
+	</select>
+	
+	<select id="selectUserInfoListCnt" parameterType="UserInfoVO" resultType="int">
+      	SELECT
+			COUNT(A.SEQ)
+		FROM userInfo A
+		WHERE 1=1
+      <include refid="whereUserList"/>
+   </select>
+	
+</mapper>

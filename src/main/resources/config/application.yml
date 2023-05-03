@@ -1,0 +1,51 @@
+#공통
+server:
+  port: 8070
+  servlet:
+    session:
+      cookie:
+        name: HOME_JSESSIONID
+    encoding:
+      charset: UTF-8
+      force: true
+  error:
+    path: /mydata/pass/home/error
+    whitelabel:
+      enabled: false
+
+spring:
+  profiles:
+    active: local
+  mvc:
+    static-path-pattern: /resources/static/**
+    view:      
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  config:
+    import : database.yml
+    
+logging:
+  config: classpath:log4j2-local.xml
+  level:
+    com.zaxxer.hikari.HikariConfig: ERROR
+    com.zaxxer.hikari: ERROR
+    #DB로그 설정
+    jdbc.sqlonly: OFF
+    jdbc.sqltiming: INFO
+    jdbc.audit: OFF
+    jdbc.resultset: OFF
+    jdbc.resultsettable: INFO
+    jdbc.connection: OFF
+
+mybatis:
+    type-aliases-package: com.skt.mydata.vo
+    mapper-locations: mybatis/mapper/**/*.xml
+    config-location : classpath:mybatis/mybatis-config.xml
+
+#api
+api:
+  url:
+    host: http://localhost:8080
+    
+filePath: 
+  path: D:\\dev\\filePath\\
