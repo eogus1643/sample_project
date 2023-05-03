@@ -9,46 +9,46 @@
         </Console>
         
         <!-- 파일  -->
-        <RandomAccessFile name ="RollingFile">
-            <FileName>/Users/daehyunlim/logs/log.txt</FileName>
-            <FilePattern>/Users/daehyunlim/logs/%d{yyyy-MM-dd-hh-mm}/log.zip</FilePattern>
-            <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
-            </Policies>
-        </RandomAccessFile>
+<!--        <RandomAccessFile name ="RollingFile">-->
+<!--            <FileName>/Users/daehyunlim/logs/log.txt</FileName>-->
+<!--            <FilePattern>/Users/daehyunlim/logs/%d{yyyy-MM-dd-hh-mm}/log.zip</FilePattern>-->
+<!--            <PatternLayout>-->
+<!--                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>-->
+<!--            </Policies>-->
+<!--        </RandomAccessFile>-->
         
-        <RandomAccessFile name ="RollingFileError">
-            <FileName>/Users/daehyunlim/logs/log_error.txt</FileName>
-            <FilePattern>/Users/daehyunlim/logs/%d{yyyy-MM-dd-hh-mm}/log_error.zip</FilePattern>
-            <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
-            </Policies>
-        </RandomAccessFile>
+<!--        <RandomAccessFile name ="RollingFileError">-->
+<!--            <FileName>/Users/daehyunlim/logs/log_error.txt</FileName>-->
+<!--            <FilePattern>/Users/daehyunlim/logs/%d{yyyy-MM-dd-hh-mm}/log_error.zip</FilePattern>-->
+<!--            <PatternLayout>-->
+<!--                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>-->
+<!--            </Policies>-->
+<!--        </RandomAccessFile>-->
         
         <Async name="consoleAsync" bufferSize="300000" blocking="false" >
 			<AppenderRef ref="console"/>
 		</Async>
 		
-		<Async name="RollingFileAsync" bufferSize="300000" blocking="false" >
-			<AppenderRef ref="RollingFile"/>
-		</Async>
+<!--		<Async name="RollingFileAsync" bufferSize="300000" blocking="false" >-->
+<!--			<AppenderRef ref="RollingFile"/>-->
+<!--		</Async>-->
 		
-		<Async name="RollingFileErrorAsync" bufferSize="300000" blocking="false" >
-			<AppenderRef ref="RollingFileError"/>
-		</Async>
+<!--		<Async name="RollingFileErrorAsync" bufferSize="300000" blocking="false" >-->
+<!--			<AppenderRef ref="RollingFileError"/>-->
+<!--		</Async>-->
         
     </Appenders>
     
     <loggers>
         <root level="debug" additivity="false">
             <AppenderRef ref="consoleAsync"/>
-            <AppenderRef ref="RollingFileAsync"/> 
+<!--            <AppenderRef ref="RollingFileAsync"/> -->
         </root>
     </loggers>
     
